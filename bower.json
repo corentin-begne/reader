@@ -1,0 +1,16 @@
+{
+  "name": "Template 3D VR",
+  "homepage": "https://github.com/Beloola/lib3D",
+  "authors": [
+    "Corentin Bègne <corentin.begne@gmail.com>"
+  ],
+  "description": "Template 3D VR",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "*",
+    "require": "http://requirejs.org/docs/release/2.1.22/minified/require.js",
+    "blueimp-file-upload": "jquery-file-upload#^9.12.5"
+  }
+}

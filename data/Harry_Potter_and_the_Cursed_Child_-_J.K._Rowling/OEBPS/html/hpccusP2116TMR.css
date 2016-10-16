@@ -1,0 +1,171 @@
+@page {margin:1em}
+
+/* Default */
+p {text-indent: 1em; margin-top: 0; margin-bottom: 0; text-align: left}
+h1, h2, h3, h4, h5, h6 {margin-top: 0; margin-bottom: 0; font-weight: normal}
+div {margin-top: 0pt; margin-bottom: 0pt}
+sup {line-height: 0}
+
+/* Pagebreak */
+.pagebreak {page-break-before: always}
+
+/* Cover */
+.cover {margin-top:0px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px; text-align: center; background-color: #ffffff;}
+.coverimage {height: 100%; text-align: center; margin-top: 0px; margin-bottom:0px}
+
+/* Titlepage */
+.author {font-size: 150%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 10%; margin-bottom: 0%; text-align: center}
+.title {font-size: 250%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 10%; margin-bottom: 0; text-align: center}
+.subtitle {font-size: 100%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 2em; margin-bottom: 2em; text-align: center}
+.logo {text-indent: 0; text-align: center; margin-top: 30%}
+
+/* Copyright */
+.copyright1 {font-size: 80%; text-indent: 0; margin-top: 4em; text-align: center}
+.copyright2 {font-size: 80%; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 1em; margin-bottom: 0; text-align: center}
+
+/* Dedication */
+.dedicationhead1 {font-size: 120%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 15%; margin-bottom: 0; text-align: center}
+.dedicationhead {font-size: 120%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 3em; margin-bottom: 0; text-align: center}
+.dedication {font-size: 100%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 25%; margin-bottom: 0; text-align: center}
+
+/* Table of Contents */
+.tochead {font-size: 120%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 2.5em; margin-bottom: 0%; text-align: center}
+.tochead2 {font-size: 120%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 25%; margin-bottom: 0%; text-align: center}
+.toc {font-size: 120%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 0.5em; margin-bottom: 0%; text-align: center}
+.toc1 {font-size: 120%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 0; margin-bottom: 0%; text-align: center}
+.toc2 {font-size: 120%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 0; margin-bottom: 0%; text-align: center}
+.toc3 {font-size: 120%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 1em; margin-bottom: 0%; text-align: center}
+
+/* Header */
+h4.halftitle {font-size: 150%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 15%; margin-bottom: 0%; text-align: center}
+h1.partnum1 {font-size: 200%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 35%; margin-bottom: 1.5em; text-align: center}
+h1.partnum2 {font-size: 200%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 1.5em; margin-bottom: 0; text-align: center}
+h1.parttitle {font-size: 200%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 40%; margin-bottom: 1.5em; text-align: center}
+h4.chapnum {font-size: 150%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: 0; margin-right: 0; margin-top: 15%; margin-bottom: 1.5em; text-align: center}
+.chaptitle {font-size: 100%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 3em; margin-bottom: 10%; text-align: center}
+
+/* Front Matter */
+.fronthead {font-size: 250%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: 0; margin-right: 0; margin-top: 25%; margin-bottom: 1em; text-align: center}
+
+/* Block Quote 
+Ex. 
+<div class="blockquote">
+<p>text</p>
+<p class="textbreak">text</p>
+</div>
+*/
+div.blockquote {margin-top: 1em;margin-bottom: 1em;}
+
+/* Line Spacing 
+Use 
+<p>&nbsp;</p> 
+to insert empty line space.
+Ex.
+<p>Text</p>
+<p>&nbsp;</p>
+<p>Text</p>
+
+.topbot {margin-top: 1em; margin-bottom: 1em}
+.topbot2 {margin-top: 2em; margin-bottom: 2em} 
+.top {margin-top: 1em; margin-bottom: 0em}
+.top2 {margin-top: 2em; margin-bottom: 0em}
+.bot {margin-bottom: 1em; margin-top: 0em}
+.bot2 {margin-bottom: 2em; margin-top: 0em} 
+*/
+
+/* Lists 
+Ex.
+<div class="list">
+<p>1. List 1</p>
+<p>2. List 2</p>
+</div>
+*/
+div.list{margin-top: 1em;margin-bottom: 1em;}
+ul {margin-top: 0pt; margin-bottom: 0pt}
+.ul {margin-top: 0pt; margin-bottom: 0pt; margin-left: 1em}
+.ul2 {margin-top: 1em; margin-bottom: 0pt; margin-left: 1em}
+
+/* Back Matter */
+h4.backhead {font-size: 150%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 35%; margin-bottom: 1.5em; text-align: center}
+p.backhead2 {font-size: 90%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 15%; margin-bottom: 0; text-align: center}
+h4.backhead3 {font-size: 150%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 15%; margin-bottom: 15%; text-align: center}
+.footnote {text-indent: 0; margin-top: 1em}
+.index {margin-left: 1em; text-indent: -1em}
+
+/* Sections/Sub-Sections */
+.textfirst {font-size: 100%; text-indent: 0; margin-left: 0; margin-right: +0; margin-top: 0; margin-bottom: +0}
+.head1 {font-size: 100%; font-style: normal; font-weight: bold; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 2em; margin-bottom: 0; text-align: left; color: gray}
+.textafterhead1 {font-size: 100%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 1em; margin-bottom: 0%}
+.head2 {font-size: 120%; font-style: normal; font-weight: bold; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 2em; margin-bottom: 0; text-align: left}
+.textafterhead2 {font-size: 100%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 1em; margin-bottom: 0%}
+
+/* Figures, Images, Captions */
+.caption {font-size: 80%; font-style: normal; font-weight: normal; text-indent: 0; margin-left: +0; margin-right: +0; margin-top: 1em; margin-bottom: 0; text-align: center}
+div.figure{margin-top: 1em; margin-bottom: 1em}
+
+/* Miscellaneous */
+.sc {font-size: 70%} /* Add a Comment if edited */
+.textbreak {margin-top: 1em; text-indent: 0}
+
+.textbreak1 {margin-top: 1em; text-indent: -2em; padding-left: 2em}
+.textbreak2 {margin-top: 1em; text-indent: 0; padding-left: 2em}
+.textbreak3 {margin-top: 1em; text-indent: 0;}
+.textbreak4 {margin-top: 0; text-indent: 0; padding-left: 2em}
+.block {margin-left: 1em; margin-right: 1em; text-indent: 0}
+.block1 {margin-left: 1em; margin-right: 0em; text-indent: 0}
+.noindent {text-indent: 0}
+.center{text-align:center;text-indent:0; margin:0 0 0 0}
+.right {text-indent: 0; text-align: right}
+.dropcap {font-size: x-large; font-weight: normal; line-height: 0}
+.hang1 {text-indent: -1em}
+
+.gray {color: gray}
+
+div.box1 {border-top: 1pt black solid; border-right: 1pt black solid; border-bottom: 1pt black solid; border-left: 1pt black solid}
+div.box2 {border-top: 1pt black dashed; border-right: 1pt black dashed; border-bottom: 1pt black dashed; border-left: 1pt black dashed}
+div.box3 {border-top: 2pt black solid; border-right: 2pt black solid; border-bottom: 2pt black solid; border-left: 2pt black solid; padding-top: 1pt; padding-right: 1pt; padding-left: 1pt; padding-bottom: 1pt; }
+
+/* Additional */
+img {text-indent: 0em}
+.break {text-indent: 0; text-align: center; margin-top: 1em; margin-bottom: 1em}
+.portraitfull{text-indent: 0; height: 100vh; text-align: center}
+a {  
+  -webkit-text-fill-color: inherit;  
+  color: inherit;  
+  text-decoration: none;
+}
+
+.t15 { margin:15% 0 0 0}
+.f130 {font-size:130%}
+.h100{height:100%}
+.center1{text-align:center;text-indent:0; margin:1em 0 0 0}
+
+strong{font-weight:bold;}
+em{font-style:italic; font-weight: normal;}
+
+.orn {text-indent: 0; margin-left: 0; margin-right: +0; margin-top: 0; margin-bottom: 0; text-align: center}
+.orn2 {text-indent: 0; margin-left: 0; margin-right: +0; margin-top: 0; margin-bottom: 15%; text-align: center}
+.orn3 {text-indent: 0; margin-left: 0; margin-right: +0; margin-top: 2em; margin-bottom: 0; text-align: center}
+
+.ornpart {text-indent: 0; margin-left: 0; margin-right: +0; margin-top: 30%; margin-bottom: 0; text-align: center}
+
+.intro {text-indent: 0; margin-left: 0; margin-right: +0; margin-top: 25%; margin-bottom: 0; text-align: center}
+
+.alsoby{text-align:center;text-indent:0; margin:0 0 0 0;}
+.alsoby1{text-align:center;text-indent:0; margin:1em 0 0 0;}
+.underline{text-decoration: underline}
+
+.role {text-align: center; text-indent: 0; margin: .5em 0 0 0}
+.actor {text-align: center; text-indent: 0; margin: 0 0 0 0}
+/* for brand page */
+.width94 {
+  display: inline-block;
+  width: 94%;
+  margin-left: auto;
+  margin-right: auto;
+  text-indent: 0;
+  text-align: center;}
+.brand{text-align: center; margin-top: 4%;margin-bottom: 10%;}
+.center1a{text-align:center;text-indent:0; margin:1em 0 0 0; font-size: 180%}
+.center1b{text-align:center;text-indent:0; margin:.4em 0 0 0; font-size: 180%}
+.boekstaaf { border: 1px solid; border-top-color: #313234; text-decoration: none; vertical-align: middle; margin: 1px; border-bottom-color: #383037; padding: 10px; font-size: 12px; color: #303030; background: #303036; display: none;  } 

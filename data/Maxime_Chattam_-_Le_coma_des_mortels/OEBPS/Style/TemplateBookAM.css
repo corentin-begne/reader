@@ -1,0 +1,77 @@
+@font-face {
+    font-family: "cac_champagne";
+    font-style: normal;
+    font-weight: normal;
+    src: url(../Fonts/cac_champagne.ttf);
+    }
+
+h1.front_title {
+    margin-bottom: 1em;
+    margin-top: 3em;
+    }
+
+div.exergue_container > p.dedicace {
+    text-indent: 0;
+    margin-left: 0;
+    font-size: small;
+    font-style: normal;
+    text-align: justify;
+    margin-left: 20%;
+    }
+div.exer {
+    margin-top: 8em;
+    }
+.chap_number {
+    margin-bottom: 2em;
+    margin-top: 3em;
+    }
+.front_title_niv2 {
+    font-size: medium;
+    font-weight: normal;
+    text-align: left;
+    margin-left: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    }
+p.para {
+    padding-left: 0;
+    }
+
+.citation_container {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 1em;
+    }
+.citation_para {
+    font-size: 1em;
+    font-style: normal;
+    text-align: justify;
+    text-indent: 1em;
+    margin-left: 0;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    }
+
+.para1 {
+    text-indent: 0;
+    }
+.front_para1 {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 140%;
+    margin-left: 3em;
+    }
+.front_para2 {
+    font-size: 1em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    line-height: 140%;
+    margin-left: 3em;
+    }
+.exergue_auteur {
+    font-size: small;
+    text-align: right;
+    font-style: normal;
+    margin-top: 1em;
+    }

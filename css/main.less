@@ -1,0 +1,97 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
+    margin: 0px;
+    padding: 0;
+    overflow: hidden;
+    text-align:center;
+}
+.bookControl{
+  position: absolute;
+  left:calc(25% - 44.5625px);
+  top:0;
+  z-index: 1;
+  font-weight: bold;
+  *{
+    display: inline-block;
+    vertical-align: middle;    
+    cursor: pointer;
+    color: white;
+    font-size: 40px;    
+  }
+  input{
+    width: 72px;
+    color: #000;
+    text-align: right;
+    padding-right: 8px;
+  }
+}
+page{
+  position: absolute;
+  background: 0 0;
+  width: calc(100% - 500px);
+  height: calc(100% - 95px);
+  top: 60px;
+  left: 0;
+  z-index: 1;
+  text-align: left;
+  padding-left: 50px;
+  padding-right: 450px;
+  font-size: 40px;
+  font-weight: bold;
+  overflow-y: auto;
+}
+input[type="file"]{
+    width:100%;
+    height:100%;
+    font-size: 200px;
+    opacity:0;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor:pointer;
+}
+.styled-select {
+   position: absolute;
+   z-index: 1;
+   top:5px;
+   &.themeContainer{
+    left:calc(50% - 120px);
+   }
+   &.bookContainer{
+    left:5px;
+   }
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 240px;
+   color: #000;
+   overflow: hidden;   
+}
+
+.styled-select select {
+   border: 1px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+   width: 268px;
+   background: transparent;
+   text-transform: none;
+   padding: 5px;
+   color:white;
+   cursor:pointer;
+   option{
+    background-color:black;
+   }
+}
+.hide{
+    display:none;
+}
+.background{
+    width:100%;
+    height:100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

@@ -1,0 +1,132 @@
+
+body {
+    hyphens: auto;
+    -epub-hyphens: auto;
+    -webkit-hyphens: auto;
+    adobe-hyphenate: auto;
+    }
+p {
+    margin: 0;
+    padding: 0;
+    }
+
+sup {
+    font-size: 0.7em;
+    line-height: 0.7em;
+    vertical-align: 60%;
+    }
+
+.exergue_container {
+    display: block;
+    font-size: x-small;
+    text-align: right;
+    margin-left: 8px;
+    margin-top: 18px;
+    }
+
+.info_copyright {
+    margin-top: 0.5em;
+    font-size: small;
+    text-align: center;
+    text-indent: 0;
+    }
+.dedicace {
+    font-size: small;
+    text-align: right;
+    font-style: italic;
+    text-indent: 0;
+    }
+.lettrine-top {
+    font-size: 2.7em;
+    line-height: 0.65em;
+    }
+.citation_para {
+    font-size: small;
+    font-style: normal;
+    text-align: justify;
+    text-indent: 1em;
+    margin-left: 12px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    }
+.exergue_auteur {
+    font-size: small;
+    text-align: right;
+    font-style: italic;
+    margin-top: 1em;
+    }
+.para {
+    font-size: small;
+    font-style: normal;
+    text-align: justify;
+    text-indent: 1em;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    }
+
+.typo_italic {
+    font-style: italic;
+    }
+.typo_smallcaps {
+    font-size: 0.8em;
+    }
+
+.front_title {
+    font-size: large;
+    font-style: normal;
+    text-align: center;
+    font-weight: normal;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    hyphens: none;
+    -epub-hyphens: none;
+    -webkit-hyphens: none;
+    adobe-hyphenate: none;
+    }
+.front_para {
+    font-size: small;
+    font-style: normal;
+    text-align: justify;
+    text-indent: 1em;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    }
+.front_title_niv2 {
+    font-size: medium;
+    font-weight: normal;
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    hyphens: none;
+    -epub-hyphens: none;
+    -webkit-hyphens: none;
+    adobe-hyphenate: none;
+    }
+
+.chap_number {
+    font-size: large;
+    font-style: normal;
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-weight: normal;
+    hyphens: none;
+    -epub-hyphens: none;
+    -webkit-hyphens: none;
+    adobe-hyphenate: none;
+    }
+
+.img_container {
+    text-indent: 0;
+    display: block;
+    }
+
+div.img_container.fullpage {
+    text-align: center;
+    width: 100%;
+    clear: both;
+    }
+img.fullpage {
+    height: 100%;
+    max-width: 100%;
+    }

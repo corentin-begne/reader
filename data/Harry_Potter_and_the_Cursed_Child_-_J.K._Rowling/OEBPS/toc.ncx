@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"><ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
+
+   <head>
+
+      <meta name="dtb:uid" content="9781781107041"/>
+
+      <meta name="dtb:depth" content="1"/>
+
+      <meta name="dtb:totalPageCount" content="0"/>
+
+      <meta name="dtb:maxPageNumber" content="0"/>
+
+   </head>
+
+ <docTitle><text>Harry Potter and the Cursed Child</text></docTitle>
+
+   <navMap>
+<navPoint id="navpoint-1" playOrder="1"><navLabel><text>Pottermore.com</text></navLabel><content src="html/03_brandPT5605MR.html"/></navPoint>
+<navPoint id="navpoint-2" playOrder="2"><navLabel><text>Contents </text></navLabel><content src="html/05_tocP9575TMR.html#toc"/></navPoint>
+<navPoint id="navpoint-3" playOrder="3"><navLabel><text>PART ONE</text></navLabel><content src="html/06_p1PT3598MR.html#p1"/></navPoint>
+
+<navPoint id="navpoint-4" playOrder="4"><navLabel><text>ACT ONE</text></navLabel><content src="html/07_p1a1P8485TMR.html#p1a1"/></navPoint>
+
+<navPoint id="navpoint-5" playOrder="5"><navLabel><text>ACT TWO</text></navLabel><content src="html/27_p1a2PTMR6779.html#p1a2"/></navPoint>
+
+<navPoint id="navpoint-6" playOrder="6"><navLabel><text>PART TWO</text></navLabel><content src="html/48_p24539PTMR.html#p2"/></navPoint>
+
+<navPoint id="navpoint-7" playOrder="7"><navLabel><text>ACT THREE</text></navLabel><content src="html/49_p2a3PTM9568R.html#p2a3"/></navPoint>
+
+<navPoint id="navpoint-8" playOrder="8"><navLabel><text>ACT FOUR</text></navLabel><content src="html/71_p2a4P4091TMR.html#p2a4"/></navPoint>
+
+<navPoint id="navpoint-9" playOrder="9"><navLabel><text>ABOUT THE PRODUCTION</text></navLabel><content src="html/88_aboutPTM4968R.html#about"/></navPoint>
+
+<navPoint id="navpoint-10" playOrder="10"><navLabel><text>BIOGRAPHIES OF THE ORIGINAL STORY TEAM</text></navLabel><content src="html/91_bioPTMR461.html#bio"/></navPoint>
+
+<navPoint id="navpoint-11" playOrder="11"><navLabel><text>ACKNOWLEDGEMENTS</text></navLabel><content src="html/92_ackPTM6801R.html#ack"/></navPoint>
+<navPoint id="navpoint-12" playOrder="12"><navLabel><text>Also By</text></navLabel><content src="html/93_alsobyPTMR7732.html"/></navPoint>
+<navPoint id="navpoint-13" playOrder="13"><navLabel><text>Copyright</text></navLabel><content src="html/96_copyrightP3721TMR.html"/></navPoint>
+   </navMap>
+</ncx>
