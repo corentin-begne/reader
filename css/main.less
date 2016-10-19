@@ -8,6 +8,27 @@ body, html {
     overflow: hidden;
     text-align:center;
 }
+.readContainer{
+  position: absolute;
+  left:10px;
+  bottom: 10px;
+  z-index: 1;
+  & > *{
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+.read{
+  width: 48px;
+  height: 48px;  
+  cursor: pointer;  
+  &.play{    
+    background-image: url("../img/play.svg");
+  }
+  &.pause{    
+    background-image: url("../img/pause.svg");
+  }
+}
 .bookControl{
   position: absolute;
   left:calc(25% - 44.5625px);
@@ -39,7 +60,7 @@ page{
   text-align: left;
   padding-left: 50px;
   padding-right: 450px;
-  font-size: 40px;
+  font-size: 38px;
   font-weight: bold;
   overflow-y: auto;
 }

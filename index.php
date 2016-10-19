@@ -18,7 +18,7 @@
         <input id="fileupload" type="file" name="files[]" data-url="php/upload.php" multiple />
         <div class='bookContainer styled-select'>
             <select class="book">
-                <option selected>Choisir un livre</option>
+                <option selected value="">Choisir un livre</option>
                 <? foreach(glob('data/*', GLOB_ONLYDIR) as $dir): ?>                    
                     <option value="<?=basename($dir)?>">
                         <?=basename($dir)?>
@@ -38,27 +38,27 @@
                 <? foreach([
                     'harry_potter' => [
                         'name'=> 'Soir de pleine lune',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: white;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: antiquewhite;'
                     ],
                     'grass_book' => [
                         'name'=> 'Herbe Nuit',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: white;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: antiquewhite;'
                     ],
                     'grass_book2' => [
                         'name'=> 'Herbe Jour',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: black;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: black;'
                     ],
                     'magic_book' => [
                         'name'=> 'Livre magique droite',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: white;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: antiquewhite;'
                     ],
                     'magic_book2' => [
                         'name'=> 'Livre Magique Gauche',
-                        'style'=> 'padding-left: 700px;padding-right: 5px;width: calc(100% - 705px);color: white;'
+                        'style'=> 'padding-left: 700px;padding-right: 5px;width: calc(100% - 705px);text-color: antiquewhite;'
                     ],
                     'panda' => [
                         'name'=> 'Pandi Panda',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: white;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: antiquewhite;'
                     ]
                 ] as $img => $theme): ?>
                     <option pos='<?=$theme['style']?>' <?=($img === 'harry_potter') ? 'selected' : ''?> value="<?=$img?>">
@@ -69,5 +69,9 @@
         </div>
         <img src="img/harry_potter.jpg" class='background' />
         <page></page>
+        <div class='readContainer hide'>
+            <div class='read play' title="Lire"></div>        
+            <input id='volumeSpeak' type="range" min='0' max='1' value='1' step='0.1' />
+        </div>
     </body>
 </html>

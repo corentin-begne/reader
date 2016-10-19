@@ -1,4 +1,12 @@
 <?
+    function writePage($target, $data){
+        file_put_contents($target, $data);
+    }
+
+    function cleanText($text){
+        return strip_tags($text, '<br><p><span>'); 
+    }
+
     $result = ['success'=>false];
     if(isset($_POST['data'])){
         $_POST['name'] = str_replace([' ', '.epub', '\''], ['_', '', '_'], $_POST['name']);
@@ -14,6 +22,39 @@
             system('chmod -R 777 '.$path.'/'.$folder);
             system('rm -f '.$target);
             $result['name'] = $folder;
+            // create pages (1848 chars)
+            $path .= '/'.$folder.'/';
+            system('mkdir '.$path.'pages');            
+            $container = simplexml_load_file($path.'META-INF/container.xml');
+            $name = (string)$container->rootfiles[0]->rootfile->attributes()['full-path'];
+            // read manifest
+            $manifest = simplexml_load_file($path.$name);
+            $data = [];
+            foreach($manifest->manifest[0]->item as $item){
+                $href = (string)$item->attributes()['href'];
+                if((stripos($href, '.html') !== false || stripos($href, '.xhtml') !== false) && stripos($href, 'cover') === false && stripos($href, 'title') === false){   
+                        $tmp = explode('</p>', cleanText(file_get_contents(str_replace('/OEBPS/OEBPS/', '/OEBPS/', $path.'/OEBPS/'.$href))));            
+                        for($i=0; $i<count($tmp); $i++){
+                            $data[] = $tmp[$i].((count($tmp) === 1) ? '' : '</p>');
+                        }
+                }
+            }
+            $page = '';            
+            $path .= 'pages/';
+            $currentPage = 1;
+            $max = 1848;
+            for($i=0; $i<count($data); $i++){
+                if(strlen(strip_tags($page)) >= $max){
+                    writePage($path.$currentPage, $page);
+                    $page = '';
+                    $currentPage++;
+                }
+                $page .= $data[$i];
+            }
+            if($page !== ''){
+                writePage($path.$currentPage, $page);
+            }
+            system("chmod - R 777 ".$path);
             $result['success']=true;
         }
     } else {

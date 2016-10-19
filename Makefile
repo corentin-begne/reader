@@ -4,7 +4,7 @@ baseUrl = .
 
 conf = ./confrequire.js 
 name = ./main.confrequire.js
-out_prod = ./main.min.js
+out_prod = ./main.js
 
 compile:
 	node $(concatScript) $(conf) > $(tempAllConf)
