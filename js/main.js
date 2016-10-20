@@ -24,9 +24,14 @@ var APP3D;
         $(".read").mousedown(togglePlay);
         $("page").scroll(checkScroll);
         $("#volumeSpeak").change(changeVolumeSpeak);
+        $(".theme").change();
+        var voices = window.speechSynthesis.getVoices();        
         var timer;
         var speech = new SpeechSynthesisUtterance();
+        speech.voice = "none";
         var currentLine = 0;
+        var cuted = [];
+        var voices;
 
         function resume(){
             window.speechSynthesis.resume();
@@ -65,7 +70,8 @@ var APP3D;
 
 
             function play(){
-                var lines = $("page > *");
+                var lines = $("page > p");
+                var element;
                 if(lines.length === 0){
                     if(Number($("#currentPage").val()) < Number($("#maxPage").text())){
                         next();
@@ -74,21 +80,37 @@ var APP3D;
                     return false;
                 }                              
                 speak();
-                
+
                 function speak(){
                     speech.onend = nextLine; 
                     speech.onresume = resume;
                     speech.onpause = pause;
-                    var element = $(lines).filter(":eq("+(currentLine)+")");
-                    $("page").scrollTop(element.offset().top);
-                    $("page > *").css("background-color", "transparent");
-                    element.css("background-color", "gray");
-                    speech.text = element.text().trim()+" ";
+                    if(cuted.length === 0){
+                        element = $(lines).filter(":eq("+(currentLine)+")");
+                        $("page").scrollTop(element.offset().top-60-element.outerHeight()/2);
+                        $("page > *").css("background-color", "transparent");
+                        element.css("background-color", "gray");
+                        cuted = element.text().trim().split(".");
+                        for(var i=0; i<cuted.length; i++){
+                            cuted[i] = cuted[i];
+                        }
+                        currentLine++;
+                    }
+                    var tmp = cuted.shift();
+                    if(tmp.length > 250){
+                        tmp = tmp.split(",");
+                        for(var i=(tmp.length-1); i>=0; i--){
+                            tmp[i] = tmp[i]+",";
+                            cuted.unshift(tmp[i]);
+                        }
+                    } else {
+                        cuted.unshift(tmp);
+                    }
+                    speech.text = cuted.shift();
                     window.speechSynthesis.speak(speech);
                 }
 
-                function nextLine(){
-                    currentLine++;
+                function nextLine(){                    
                     if(currentLine === lines.length){
                         $("page").scrollTop($("page").get(0).scrollHeight - $("page").height());
                         timer = setInterval(check, 250);     
@@ -101,7 +123,7 @@ var APP3D;
                             return false;
                         }
                         clearInterval(timer);
-                        lines = $("page > *");
+                        lines = $("page > p");                        
                         if(currentLine === lines.length){
                             if(Number($("#currentPage").val()) < Number($("#maxPage").text())){
                                 next();
@@ -210,6 +232,13 @@ var APP3D;
 
                         function complete(data){
                             speech.lang = data.data.detections[0].language+"-"+data.data.detections[0].language.toUpperCase();
+                            voices = window.speechSynthesis.getVoices();
+                            for(var i=0; i<voices.length; i++){
+                                if(voices[i].lang === speech.lang){
+                                    speech.voice = voices[i];
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
@@ -223,7 +252,7 @@ var APP3D;
             }, ready, "json");
 
             function ready(result){
-                $("page").html($("page").html()+"<br />"+result.data);                
+                $("page").html($("page").html()+(($("page").html() !== "") ? "<hr>" : "")+result.data);                
                 $("#currentPage").val(currentPage);
                 if(result.nbPage){
                     $("#maxPage").text(result.nbPage);
@@ -284,6 +313,17 @@ var APP3D;
                     }
                 }
             }
+        }
+
+        function strSplit (string, splitLength) {
+          var chunks = []
+          var pos = 0
+          var len = string.length
+
+          while (pos < len) {
+            chunks.push(string.slice(pos, pos += splitLength))
+          }
+          return chunks
         }
     }
 })();

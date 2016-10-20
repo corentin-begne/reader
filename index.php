@@ -38,27 +38,27 @@
                 <? foreach([
                     'harry_potter' => [
                         'name'=> 'Soir de pleine lune',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: antiquewhite;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: antiquewhite;'
                     ],
                     'grass_book' => [
                         'name'=> 'Herbe Nuit',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: antiquewhite;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: antiquewhite;'
                     ],
                     'grass_book2' => [
                         'name'=> 'Herbe Jour',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: black;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: black;'
                     ],
                     'magic_book' => [
                         'name'=> 'Livre magique droite',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: antiquewhite;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: antiquewhite;'
                     ],
                     'magic_book2' => [
                         'name'=> 'Livre Magique Gauche',
-                        'style'=> 'padding-left: 700px;padding-right: 5px;width: calc(100% - 705px);text-color: antiquewhite;'
+                        'style'=> 'padding-left: 700px;padding-right: 5px;width: calc(100% - 705px);color: antiquewhite;'
                     ],
                     'panda' => [
                         'name'=> 'Pandi Panda',
-                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);text-color: antiquewhite;'
+                        'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: antiquewhite;'
                     ]
                 ] as $img => $theme): ?>
                     <option pos='<?=$theme['style']?>' <?=($img === 'harry_potter') ? 'selected' : ''?> value="<?=$img?>">

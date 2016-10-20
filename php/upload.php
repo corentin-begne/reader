@@ -33,7 +33,7 @@
             foreach($manifest->manifest[0]->item as $item){
                 $href = (string)$item->attributes()['href'];
                 if((stripos($href, '.html') !== false || stripos($href, '.xhtml') !== false) && stripos($href, 'cover') === false && stripos($href, 'title') === false){   
-                        $tmp = explode('</p>', cleanText(file_get_contents(str_replace('/OEBPS/OEBPS/', '/OEBPS/', $path.'/OEBPS/'.$href))));            
+                        $tmp = explode('</p>', cleanText(file_get_contents(str_replace('/OEBPS/OEBPS/', '/OEBPS/', $path.'/OEBPS/'.$href))));                   
                         for($i=0; $i<count($tmp); $i++){
                             $data[] = $tmp[$i].((count($tmp) === 1) ? '' : '</p>');
                         }
