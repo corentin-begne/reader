@@ -15,6 +15,8 @@
         <? endif; ?>
     </head>
     <body>
+        <img src="img/stars.png" class='stars hide' />
+        <div id="fairy"></div>
         <input id="fileupload" type="file" name="files[]" data-url="php/upload.php" multiple />
         <div class='bookContainer styled-select'>
             <select class="book">
@@ -71,7 +73,23 @@
         <page></page>
         <div class='readContainer hide'>
             <div class='read play' title="Lire"></div>        
-            <input id='volumeSpeak' type="range" min='0' max='1' value='1' step='0.1' />
+            <input id='volumeSpeak' type="range" min='0' max='1' value='1' step='0.01' />
+        </div>
+        <div class='soundContainer'>
+            <div class='sound play' title="Lire"></div>        
+            <input id='volumeSound' type="range" min='0' max='1' value='1' step='0.01' />
+            <div>
+                <div class='styled-select'>
+                    <select>
+                        <option selected value="">Choisir une musique</option>
+                        <? foreach(glob('mp3/*') as $sound): ?>                    
+                            <option value="<?=$sound?>">
+                                <?=basename($sound)?>
+                            </option>
+                        <? endforeach; ?>
+                    </select>
+                </div>
+            </div>
         </div>
     </body>
 </html>

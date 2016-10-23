@@ -7,6 +7,22 @@ body, html {
     padding: 0;
     overflow: hidden;
     text-align:center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor:none !important;
+    *{
+      cursor:none !important;
+    }
+}
+.stars{
+  width:14px;
+  height:15px;
+  position:absolute;
+  z-index:3;
 }
 .readContainer{
   position: absolute;
@@ -18,14 +34,23 @@ body, html {
     vertical-align: middle;
   }
 }
+.soundContainer{
+  position: absolute;
+  right:250px;
+  top: 10px;
+  z-index: 1;
+  & > *{
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
 .chapter{
   text-decoration: underline;
   color:darkgreen;
 }
-.read{
+.read, .sound{
   width: 48px;
-  height: 48px;  
-  cursor: pointer;  
+  height: 48px;    
   &.play{    
     background-image: url("../img/play.svg");
   }
@@ -42,7 +67,6 @@ body, html {
   *{
     display: inline-block;
     vertical-align: middle;    
-    cursor: pointer;
     color: white;
     font-size: 40px;    
   }
@@ -52,6 +76,14 @@ body, html {
     text-align: right;
     padding-right: 8px;
   }
+}
+#fairy{
+    position: absolute;
+    z-index: 2;
+    width:22px;
+    height:31px;
+    background-image: url("../img/fairy.png");
+    background-position: 0 0 ;
 }
 page{
   position: absolute;
@@ -77,7 +109,6 @@ input[type="file"]{
     position: absolute;
     top: 0;
     left: 0;
-    cursor:pointer;
 }
 .styled-select {
    position: absolute;
@@ -89,7 +120,7 @@ input[type="file"]{
    &.bookContainer{
     left:5px;
    }
-   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   background: url("../img/arrow.jpg") no-repeat right center;
    height: 34px;
    width: 240px;
    color: #000;
@@ -105,7 +136,6 @@ input[type="file"]{
    text-transform: none;
    padding: 5px;
    color:white;
-   cursor:pointer;
    option{
     background-color:black;
    }

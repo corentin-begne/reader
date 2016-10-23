@@ -8,7 +8,7 @@ var APP3D;
      * @event main#init
      * @description on dom ready
      */
-    function init(){
+    function init(event){
         var currentPage = 1;
         var inProgress = false;
         $("input[type=file]").bind("drop", dropEbook);
@@ -25,6 +25,11 @@ var APP3D;
         $("page").scroll(checkScroll);
         $("#volumeSpeak").change(changeVolumeSpeak);
         $(".theme").change();
+        $(".soundContainer select").change(selectSound);
+        $("#volumeSound").change(changeVolumeSound);
+        $(".sound").mousedown(togglePlaySound);
+        $(document).mousemove(moveFairy);
+        var soundPlayer = new Audio();
         var voices = window.speechSynthesis.getVoices();        
         var timer;
         var speech = new SpeechSynthesisUtterance();
@@ -32,6 +37,147 @@ var APP3D;
         var currentLine = 0;
         var cuted = [];
         var voices;
+        var lastX = 0;
+        var turning = false;
+        var direction = "idle";
+        var anims = {
+            idle : [
+                {
+                    height:31,
+                    width:22,
+                    top:0,
+                    left:0
+                },
+                {
+                    height:31,
+                    width:22,
+                    top:0,
+                    left:-25
+                },
+                {
+                    height:31,
+                    width:23,
+                    top:0,
+                    left:-50
+                }
+            ],
+            move: [
+                {
+                    height:31,
+                    width:22,
+                    top:-34,
+                    left:0
+                },
+                {
+                    height:31,
+                    width:22,
+                    top:-34,
+                    left:-22
+                }
+            ]
+        }
+        var currentAnim = 0;
+        var timerAnim;
+        var eventMove = event;
+        var maxP = 100;
+
+        timerAnim = setInterval(animate, 125);
+
+        function spawnParticles(event){
+            if($(".stars").length >=maxP){
+                return false;
+            }
+            if(event === undefined){
+                event = eventMove;
+            }        
+            var diff = Math.random() * 3.5;    
+            if(Math.round(Math.random() * 1)===1){
+                diff = -diff;
+            }
+            var x = event.clientX+$("#fairy").width()/2-7+diff;
+            var y = event.clientY+$("#fairy").height();
+            var particle = $(".stars").clone().removeClass("hide");
+            particle.css({
+                top:y+"px",
+                left:x+"px",
+                transform:"rotateY("+((Math.round(Math.random() * 1)===1) ? "180" : "0")+"deg)"
+            });
+            $("body").append(particle);
+            particle.animate({
+                top:"+="+Math.random() * 25,
+                opacity:"0"
+            }, Math.random() * 500 + 250, removeParticle);
+
+            function removeParticle(){
+                $(this).remove();
+            }
+        }
+
+        function animate(){
+            $("#fairy").css({
+                width:anims[direction][currentAnim].width+"px",
+                height:anims[direction][currentAnim].height+"px",
+                backgroundPosition: anims[direction][currentAnim].left+"px "+anims[direction][currentAnim].top+"px"
+            });
+            currentAnim++;
+            spawnParticles();
+            if(currentAnim === anims[direction].length){
+                currentAnim = 0;
+                if(direction === "move"){
+                    direction = "idle";
+                }
+            }
+        }
+
+        function moveFairy(event){
+            eventMove = event;
+            var css = {
+                top:event.clientY+"px",
+                left:event.clientX+"px"
+            };
+            if((event.clientX-lastX)<0){
+                css.transform = "none";
+            } else if((event.clientX-lastX)>0){
+                css.transform = "rotateY(180deg)";
+            }    
+            if(event.clientX === lastX){
+                direction = "idle";
+            } else {
+                if(direction === "idle"){
+                    currentAnim = 0;
+                }
+                direction = "move";
+            }
+            $("#fairy").css(css);            
+            lastX = event.clientX;            
+        }
+
+        function selectSound(){
+            var sound = $(this).find(":selected").val();
+            $(".sound").removeClass("pause").addClass("play");
+            soundPlayer.pause();
+            if(sound === ""){                
+                return false;
+            }
+            soundPlayer.src = sound;
+        }
+
+        function togglePlaySound(){
+            if($(".soundContainer select :selected").val() === ""){
+                return false;
+            }
+            if($(this).hasClass("play")){
+                $(this).removeClass("play").addClass("pause");
+                soundPlayer.play();
+            } else {
+                $(this).removeClass("pause").addClass("play");
+                soundPlayer.pause();
+            }
+        }
+
+        function changeVolumeSound(){
+            soundPlayer.volume = $(this).val();
+        }
 
         function resume(){
             window.speechSynthesis.resume();
@@ -85,9 +231,9 @@ var APP3D;
                     speech.onend = nextLine; 
                     speech.onresume = resume;
                     speech.onpause = pause;
-                    if(cuted.length === 0){
+                    if(cuted.length === 0){ 
                         element = $(lines).filter(":eq("+(currentLine)+")");
-                        $("page").scrollTop(element.offset().top-60-element.outerHeight()/2);
+                        $("page").scrollTop(element.offset().top+$("page").scrollTop()-element.outerHeight());
                         $("page > *").css("background-color", "transparent");
                         element.css("background-color", "gray");
                         cuted = element.text().trim().split(".");
@@ -252,7 +398,7 @@ var APP3D;
             }, ready, "json");
 
             function ready(result){
-                $("page").html($("page").html()+(($("page").html() !== "") ? "<hr>" : "")+result.data);                
+                $("page").append($("page").html()+((($("page").html() !== "") ? "<hr>" : "")+result.data));                
                 $("#currentPage").val(currentPage);
                 if(result.nbPage){
                     $("#maxPage").text(result.nbPage);
