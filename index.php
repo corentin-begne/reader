@@ -4,19 +4,19 @@
         <title>Ebook Reader</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/main.css">        
+        <link rel="stylesheet" href="css/main.css?v=<?=time()?>">        
         <link rel="icon" type="image/png" href="img/favicon.png">
         <? if($_SERVER["HTTP_HOST"] === "reader.com" || strpos($_SERVER["HTTP_HOST"], '192.168.1.') !== false): ?>
             <script>var requirejs = {config: function (c) {requirejs = c}}</script>
             <script src="confrequire.js"></script>
             <script data-main="main.confrequire.js" src="bower_components/require/index.js"></script>
         <? else: ?>
-            <script data-main="main.js" src="bower_components/require/index.js"></script>
+            <script data-main="main.js?v=<?=time()?>" src="bower_components/require/index.js"></script>
         <? endif; ?>
     </head>
     <body>
-        <img src="img/stars.png" class='stars hide' />
-        <div id="fairy"></div>
+       <!-- <img src="img/stars.png" class='stars hide' />
+        <div id="fairy"></div>-->
         <input id="fileupload" type="file" name="files[]" data-url="php/upload.php" multiple />
         <div class='bookContainer styled-select'>
             <select class="book">
@@ -41,6 +41,14 @@
                     'harry_potter' => [
                         'name'=> 'Soir de pleine lune',
                         'style'=> 'padding-left: 50px;padding-right: 450px;width: calc(100% - 500px);color: antiquewhite;'
+                    ],
+                    'white' => [
+                        'name'=> 'White',
+                        'style'=> 'padding-left: 50px;padding-right: 50px;width: calc(100% - 100px);color: black;background-color:white;'
+                    ],
+                    'black' => [
+                        'name'=> 'Black',
+                        'style'=> 'padding-left: 50px;padding-right: 50px;width: calc(100% - 100px);color: white;background-color:black;'
                     ],
                     'grass_book' => [
                         'name'=> 'Herbe Nuit',

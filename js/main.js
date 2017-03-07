@@ -28,12 +28,13 @@ var APP3D;
         $(".soundContainer select").change(selectSound);
         $("#volumeSound").change(changeVolumeSound);
         $(".sound").mousedown(togglePlaySound);
-        $(document).mousemove(moveFairy);
+        $(document).keydown(changeFontSize);
+      //  $(document).mousemove(moveFairy);
         var soundPlayer = new Audio();
         var voices = window.speechSynthesis.getVoices();        
         var timer;
         var speech = new SpeechSynthesisUtterance();
-        speech.voice = "none";
+      //  speech.voice = "none";
         var currentLine = 0;
         var cuted = [];
         var voices;
@@ -80,8 +81,42 @@ var APP3D;
         var timerAnim;
         var eventMove = event;
         var maxP = 100;
+        var isAvailable = true;
 
-        timerAnim = setInterval(animate, 125);
+        if(window.location.href.indexOf("noCursor") === -1){
+//            timerAnim = setInterval(animate, 125);
+        }
+
+        function changeFontSize(event){
+            var fontSize = Number($("page").css("fontSize").replace("px", ""));
+            switch(event.keyCode){
+                case 109:
+                    fontSize--;
+                    break;
+                case 107:
+                    fontSize++;
+                    break; 
+                case 46:
+                    var cur = $(".book :selected");
+                    if(cur.val() !== "" && isAvailable){
+                        isAvailable = false;
+                        if(confirm("Supprimer l'Ebook "+cur.val()+" ?")){
+                            $.post("php/delete.php", {name:cur.val()}, complete);
+                        } else {
+                            isAvailable = true;
+                        }
+                    }
+                    break;   
+            }
+            $("page").css("fontSize", fontSize);
+
+            function complete(){
+                $(".book option:eq(0)").attr("selected", true);
+                cur.remove();
+                $("page").empty();
+                isAvailable = true;
+            }
+        }
 
         function spawnParticles(event){
             if($(".stars").length >=maxP){
@@ -232,28 +267,47 @@ var APP3D;
                     speech.onresume = resume;
                     speech.onpause = pause;
                     if(cuted.length === 0){ 
-                        element = $(lines).filter(":eq("+(currentLine)+")");
-                        $("page").scrollTop(element.offset().top+$("page").scrollTop()-element.outerHeight());
-                        $("page > *").css("background-color", "transparent");
-                        element.css("background-color", "gray");
-                        cuted = element.text().trim().split(".");
-                        for(var i=0; i<cuted.length; i++){
-                            cuted[i] = cuted[i];
+                        element = $("page > p").filter(":eq("+(currentLine)+")");
+                        //var last = (currentLine===0) ? 0 : $(lines).filter(":eq("+(currentLine-1)+")").outerHeight();
+                        var val = element.text().trim();
+                        if(val !== ""){
+                            $("page").scrollTop(element.position().top+$("page").scrollTop());
+                            $("page > *").css("background-color", "transparent");
+                            element.css("background-color", "gray");
+                            cuted = val.split(".");
+                            for(var i=0; i<cuted.length; i++){
+                                if(cuted[i] !== ""){
+                                    cuted[i] = cuted[i];
+                                } else {
+                                    cuted.splice(i, 1);
+                                }
+                            }
                         }
                         currentLine++;
                     }
                     var tmp = cuted.shift();
+                    if(tmp === undefined){
+                        nextLine();
+                        return;
+                    }
                     if(tmp.length > 250){
-                        tmp = tmp.split(",");
-                        for(var i=(tmp.length-1); i>=0; i--){
-                            tmp[i] = tmp[i]+",";
-                            cuted.unshift(tmp[i]);
-                        }
+                        $.each([",", ";", "?", "!", "–", "-"], checkDelimiter);
                     } else {
                         cuted.unshift(tmp);
                     }
                     speech.text = cuted.shift();
                     window.speechSynthesis.speak(speech);
+
+                    function checkDelimiter(j, delimiter){
+                        if(tmp.indexOf(delimiter) !== -1 && tmp.indexOf(delimiter) != (tmp.length-1)){
+                            var tmp2 = tmp.split(delimiter); 
+                            for(var i=(tmp2.length-1); i>=0; i--){
+                                tmp2[i] = tmp2[i]+delimiter;
+                                cuted.unshift(tmp2[i]);
+                            }
+                            return false;
+                        }                        
+                    }
                 }
 
                 function nextLine(){                    
@@ -398,7 +452,7 @@ var APP3D;
             }, ready, "json");
 
             function ready(result){
-                $("page").append($("page").html()+((($("page").html() !== "") ? "<hr>" : "")+result.data));                
+                $("page").html($("page").html()+((($("page").html() !== "") ? "<hr>" : "")+result.data));                
                 $("#currentPage").val(currentPage);
                 if(result.nbPage){
                     $("#maxPage").text(result.nbPage);
@@ -417,8 +471,9 @@ var APP3D;
         }
 
         function changeBackground(){
-            $(".background").attr("src", "img/"+$(this).val()+".jpg");
-            $("page").attr("style", $(".theme :selected").attr("pos"));
+            var img = ($(this).val() === "white" || $(this).val() === "black") ? "" : "img/"+$(this).val()+".jpg";
+            $(".background").attr("src", img);
+            $("page").attr("style", $(".theme :selected").attr("pos")+"font-size:"+$("page").css("fontSize")+";");
         }
 
         function setEbook(event){
