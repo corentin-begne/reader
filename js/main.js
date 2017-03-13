@@ -310,29 +310,29 @@ var APP3D;
                     }
                 }
 
+                function check(){
+                    if(inProgress){
+                        return false;
+                    }
+                    clearInterval(timer);
+                    lines = $("page > p");                        
+                    if(currentLine === lines.length){
+                        if(Number($("#currentPage").val()) < Number($("#maxPage").text())){
+                            next();
+                            timer = setInterval(check, 250);
+                        } 
+                        return false;
+                    }
+                    speak();
+                }
+
                 function nextLine(){                    
                     if(currentLine === lines.length){
                         $("page").scrollTop($("page").get(0).scrollHeight - $("page").height());
                         timer = setInterval(check, 250);     
                         return false;                  
                     }
-                    speak();
-
-                    function check(){
-                        if(inProgress){
-                            return false;
-                        }
-                        clearInterval(timer);
-                        lines = $("page > p");                        
-                        if(currentLine === lines.length){
-                            if(Number($("#currentPage").val()) < Number($("#maxPage").text())){
-                                next();
-                                timer = setInterval(check, 250);
-                            } 
-                            return false;
-                        }
-                        speak();
-                    }
+                    speak();                    
                 }
             }
         }

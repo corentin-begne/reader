@@ -1,14 +1,23 @@
 <?
-   /* error_reporting(E_ALL);
+    /*error_reporting(E_ALL);
     ini_set("display_errors", "On");*/
     function writePage($target, $data){
         file_put_contents($target, $data);
     }
 
     function cleanText($text){
-        return strip_tags($text, '<br><p><span>'); 
+        return str_replace('Mrs', 'Mme',htmlspecialchars_decode(strip_tags($text, '<br><p><span>'))); 
     }
-
+ /*   $container = simplexml_load_file('/var/www/reader/data/Postmortem_Patricia_Cornwell_1990/META-INF/container.xml');
+    $name = (string)$container->rootfiles[0]->rootfile->attributes()['full-path'];
+    $manifest = simplexml_load_file('/var/www/reader/data/Postmortem_Patricia_Cornwell_1990/'.$name);
+    $arr = (array)$manifest->manifest[0];
+    $arr = (array)$arr["item"];
+ //   var_dump(count($arr), $arr);
+    for($i=1; $i<count($arr) ; $i++){
+        var_dump(file_get_contents(dirname('/var/www/reader/data/Postmortem_Patricia_Cornwell_1990/'.$name).'/'.((string)$arr[$i]['href']))); 
+        die;
+    }*/
     $result = ['success'=>false];
     header('Content-Type: application/json');
     try{
@@ -35,10 +44,13 @@
                 // read manifest
                 $manifest = simplexml_load_file($path.$name);
                 $data = [];
-                foreach($manifest->manifest[0]->item as $item){
-                    $href = (string)$item->attributes()['href'];
-                    if((stripos($href, '.html') !== false || stripos($href, '.xhtml') !== false) && stripos($href, 'cover') === false && stripos($href, 'title') === false){   
-                            $tmp = explode('</p>', cleanText(file_get_contents(dirname($path.$name).'/'.$href)));                   
+                $arr = (array)$manifest->manifest[0];
+                $arr = (array)$arr["item"];
+                for($j=0; $j<count($arr) ; $j++){
+                    $href = (string)$arr[$j]['href'];
+                    if(stripos($href, '.htm') !== false){   
+                        //var_dump(dirname($path.$name).'/'.$href); die;
+                            $tmp = explode('</p>', cleanText(file_get_contents(dirname($path.$name).'/'.$href)));//str_replace(' ', "\\ ", escapeshellcmd($href)))));                   
                             for($i=0; $i<count($tmp); $i++){
                                 $data[] = $tmp[$i].((count($tmp) === 1) ? '' : '</p>');
                             }
