@@ -25,11 +25,10 @@ var APP3D;
         $("page").scroll(checkScroll);
         $("#volumeSpeak").change(changeVolumeSpeak);
         $(".theme").change();
-        $(".soundContainer select").change(selectSound);
+    //    $(".soundContainer select").change(selectSound);
         $("#volumeSound").change(changeVolumeSound);
         $(".sound").mousedown(togglePlaySound);
-        $(document).keydown(changeFontSize);
-      //  $(document).mousemove(moveFairy);
+        $(document).mousemove(moveFairy);
         var soundPlayer = new Audio();
         var voices = window.speechSynthesis.getVoices();        
         var timer;
@@ -81,42 +80,8 @@ var APP3D;
         var timerAnim;
         var eventMove = event;
         var maxP = 100;
-        var isAvailable = true;
 
-        if(window.location.href.indexOf("noCursor") === -1){
-//            timerAnim = setInterval(animate, 125);
-        }
-
-        function changeFontSize(event){
-            var fontSize = Number($("page").css("fontSize").replace("px", ""));
-            switch(event.keyCode){
-                case 109:
-                    fontSize--;
-                    break;
-                case 107:
-                    fontSize++;
-                    break; 
-                case 46:
-                    var cur = $(".book :selected");
-                    if(cur.val() !== "" && isAvailable){
-                        isAvailable = false;
-                        if(confirm("Supprimer l'Ebook "+cur.val()+" ?")){
-                            $.post("php/delete.php", {name:cur.val()}, complete);
-                        } else {
-                            isAvailable = true;
-                        }
-                    }
-                    break;   
-            }
-            $("page").css("fontSize", fontSize);
-
-            function complete(){
-                $(".book option:eq(0)").attr("selected", true);
-                cur.remove();
-                $("page").empty();
-                isAvailable = true;
-            }
-        }
+        timerAnim = setInterval(animate, 125);
 
         function spawnParticles(event){
             if($(".stars").length >=maxP){
@@ -267,63 +232,28 @@ var APP3D;
                     speech.onresume = resume;
                     speech.onpause = pause;
                     if(cuted.length === 0){ 
-                        element = $("page > p").filter(":eq("+(currentLine)+")");
-                        //var last = (currentLine===0) ? 0 : $(lines).filter(":eq("+(currentLine-1)+")").outerHeight();
-                        var val = element.text().trim();
-                        if(val !== ""){
-                            $("page").scrollTop(element.position().top+$("page").scrollTop());
-                            $("page > *").css("background-color", "transparent");
-                            element.css("background-color", "gray");
-                            cuted = val.split(".");
-                            for(var i=0; i<cuted.length; i++){
-                                if(cuted[i] !== ""){
-                                    cuted[i] = cuted[i];
-                                } else {
-                                    cuted.splice(i, 1);
-                                }
-                            }
+                        element = $(lines).filter(":eq("+(currentLine)+")");
+                        $("page").scrollTop(element.offset().top+$("page").scrollTop()-element.outerHeight());
+                        $("page > *").css("background-color", "transparent");
+                        element.css("background-color", "gray");
+                        cuted = element.text().trim().split(".");
+                        for(var i=0; i<cuted.length; i++){
+                            cuted[i] = cuted[i];
                         }
                         currentLine++;
                     }
                     var tmp = cuted.shift();
-                    if(tmp === undefined){
-                        nextLine();
-                        return;
-                    }
                     if(tmp.length > 250){
-                        $.each([",", ";", "?", "!", "–", "-"], checkDelimiter);
+                        tmp = tmp.split(",");
+                        for(var i=(tmp.length-1); i>=0; i--){
+                            tmp[i] = tmp[i]+",";
+                            cuted.unshift(tmp[i]);
+                        }
                     } else {
                         cuted.unshift(tmp);
                     }
                     speech.text = cuted.shift();
                     window.speechSynthesis.speak(speech);
-
-                    function checkDelimiter(j, delimiter){
-                        if(tmp.indexOf(delimiter) !== -1 && tmp.indexOf(delimiter) != (tmp.length-1)){
-                            var tmp2 = tmp.split(delimiter); 
-                            for(var i=(tmp2.length-1); i>=0; i--){
-                                tmp2[i] = tmp2[i]+delimiter;
-                                cuted.unshift(tmp2[i]);
-                            }
-                            return false;
-                        }                        
-                    }
-                }
-
-                function check(){
-                    if(inProgress){
-                        return false;
-                    }
-                    clearInterval(timer);
-                    lines = $("page > p");                        
-                    if(currentLine === lines.length){
-                        if(Number($("#currentPage").val()) < Number($("#maxPage").text())){
-                            next();
-                            timer = setInterval(check, 250);
-                        } 
-                        return false;
-                    }
-                    speak();
                 }
 
                 function nextLine(){                    
@@ -332,7 +262,23 @@ var APP3D;
                         timer = setInterval(check, 250);     
                         return false;                  
                     }
-                    speak();                    
+                    speak();
+
+                    function check(){
+                        if(inProgress){
+                            return false;
+                        }
+                        clearInterval(timer);
+                        lines = $("page > p");                        
+                        if(currentLine === lines.length){
+                            if(Number($("#currentPage").val()) < Number($("#maxPage").text())){
+                                next();
+                                timer = setInterval(check, 250);
+                            } 
+                            return false;
+                        }
+                        speak();
+                    }
                 }
             }
         }
@@ -471,9 +417,8 @@ var APP3D;
         }
 
         function changeBackground(){
-            var img = ($(this).val() === "white" || $(this).val() === "black") ? "" : "img/"+$(this).val()+".jpg";
-            $(".background").attr("src", img);
-            $("page").attr("style", $(".theme :selected").attr("pos")+"font-size:"+$("page").css("fontSize")+";");
+            $(".background").attr("src", "img/"+$(this).val()+".jpg");
+            $("page").attr("style", $(".theme :selected").attr("pos"));
         }
 
         function setEbook(event){

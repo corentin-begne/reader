@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/main.css?v=<?=time()?>">        
         <link rel="icon" type="image/png" href="img/favicon.png">
-        <? if($_SERVER["HTTP_HOST"] === "reader.com" || strpos($_SERVER["HTTP_HOST"], '192.168.1.') !== false): ?>
+        <? if($_SERVER["HTTP_HOST"] === "localhost" || strpos($_SERVER["HTTP_HOST"], '192.168.1.') !== false): ?>
             <script>var requirejs = {config: function (c) {requirejs = c}}</script>
             <script src="confrequire.js"></script>
             <script data-main="main.confrequire.js" src="bower_components/require/index.js"></script>
@@ -23,7 +23,11 @@
                 <option selected value="">Choisir un livre</option>
                 <? foreach(glob('data/*', GLOB_ONLYDIR) as $dir): ?>                    
                     <option value="<?=basename($dir)?>">
-                        <?=basename($dir)?>
+                        <?
+                            $nb = (int)file_get_contents($dir.'/page.txt');
+                            $total = count(glob($dir.'/pages/*'));
+                        ?>
+                        <?=basename($dir).' ['.$nb.'/'.$total.'] '.round((100*$nb/$total),2).'%'?>
                     </option>
                 <? endforeach; ?>
             </select>
@@ -82,22 +86,6 @@
         <div class='readContainer hide'>
             <div class='read play' title="Lire"></div>        
             <input id='volumeSpeak' type="range" min='0' max='1' value='1' step='0.01' />
-        </div>
-        <div class='soundContainer'>
-            <div class='sound play' title="Lire"></div>        
-            <input id='volumeSound' type="range" min='0' max='1' value='1' step='0.01' />
-            <div>
-                <div class='styled-select'>
-                    <select>
-                        <option selected value="">Choisir une musique</option>
-                        <? foreach(glob('mp3/*') as $sound): ?>                    
-                            <option value="<?=$sound?>">
-                                <?=basename($sound)?>
-                            </option>
-                        <? endforeach; ?>
-                    </select>
-                </div>
-            </div>
         </div>
     </body>
 </html>

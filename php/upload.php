@@ -1,12 +1,13 @@
 <?
-    /*error_reporting(E_ALL);
-    ini_set("display_errors", "On");*/
+    error_reporting(E_ALL);
+    ini_set("display_errors", "On");
     function writePage($target, $data){
         file_put_contents($target, $data);
     }
 
     function cleanText($text){
-        return str_replace('Mrs', 'Mme',htmlspecialchars_decode(strip_tags($text, '<br><p><span>'))); 
+        $val =  str_replace(['M ', 'M. ', 'Mrs', ' jean ', ' jean,', ' jean.'], ['Mr ', 'Mr ', 'Mme', ' djine ', ' djine,', ' djine.'],htmlspecialchars_decode(strip_tags($text, '<br><p><span>'))); 
+        return str_ireplace(['o.k', 'o.k.', 'ok ', 'hmmm', ' h ', '-t-il', '-t-elle', 't-il', 't-elle', ' etc.', ' etc '], ['okay', 'okay', 'okay ', 'heumm', 'h', ' t\'il', ' t\'elle', 't\'il', 't\'elle', 'et cetera', 'et cetera'], $val);
     }
  /*   $container = simplexml_load_file('/var/www/reader/data/Postmortem_Patricia_Cornwell_1990/META-INF/container.xml');
     $name = (string)$container->rootfiles[0]->rootfile->attributes()['full-path'];
@@ -32,13 +33,13 @@
                 file_put_contents($target, base64_decode(substr($_POST['data'], strpos($_POST['data'], ',')+1)));
                 $folder = basename($_POST['name'], '.epub');
             //    var_dump($result, die;
-                system('unzip '.$target.' -d '.$path.'/'.$folder.' > /dev/null 2>&1');
-                system('chmod -R 777 '.$path.'/'.$folder);
-                system('rm -f '.$target);
+                exec('unzip '.$target.' -d '.$path.'/'.$folder.' > /dev/null 2>&1');
+                exec('chmod -R 777 '.$path.'/'.$folder);
+                exec('rm -f '.$target);
                 $result['name'] = $folder;
                 // create pages (1848 chars)
                 $path .= '/'.$folder.'/';
-                system('mkdir '.$path.'pages');            
+                exec('mkdir '.$path.'pages');            
                 $container = simplexml_load_file($path.'META-INF/container.xml');
                 $name = (string)$container->rootfiles[0]->rootfile->attributes()['full-path'];
                 // read manifest
@@ -48,7 +49,7 @@
                 $arr = (array)$arr["item"];
                 for($j=0; $j<count($arr) ; $j++){
                     $href = (string)$arr[$j]['href'];
-                    if(stripos($href, '.htm') !== false){   
+                    if(stripos($href, 'htm') !== false){   
                         //var_dump(dirname($path.$name).'/'.$href); die;
                             $tmp = explode('</p>', cleanText(file_get_contents(dirname($path.$name).'/'.$href)));//str_replace(' ', "\\ ", escapeshellcmd($href)))));                   
                             for($i=0; $i<count($tmp); $i++){
@@ -71,7 +72,7 @@
                 if($page !== ''){
                     writePage($path.$currentPage, $page);
                 }
-                system("chmod - R 777 ".$path);
+                exec("chmod - R 777 ".$path);
                 $result['success']=true;
             }
         } else {
