@@ -7,7 +7,7 @@
 
     function cleanText($text){
         $val =  str_replace(['M ', 'M. ', 'Mrs', ' jean ', ' jean,', ' jean.'], ['Mr ', 'Mr ', 'Mme', ' djine ', ' djine,', ' djine.'],htmlspecialchars_decode(strip_tags($text, '<br><p><span>'))); 
-        return str_ireplace(['o.k', 'o.k.', 'ok ', 'hmmm', ' h ', '-t-il', '-t-elle', 't-il', 't-elle', ' etc.', ' etc '], ['okay', 'okay', 'okay ', 'heumm', 'h', ' t\'il', ' t\'elle', 't\'il', 't\'elle', 'et cetera', 'et cetera'], $val);
+        return str_ireplace(['o.k', 'o.k.', 'ok ', 'hmmm', ' h ', '-t-il', '-t-elle', 't-il', 't-elle', ' etc.', ' etc '], ['okay', 'okay', 'okay ', 'heumm', 'h', ' t\'il', ' t\'elle', 't\'il', 't\'elle', 'et cétéra', 'et cétéra'], $val);
     }
  /*   $container = simplexml_load_file('/var/www/reader/data/Postmortem_Patricia_Cornwell_1990/META-INF/container.xml');
     $name = (string)$container->rootfiles[0]->rootfile->attributes()['full-path'];

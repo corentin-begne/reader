@@ -438,9 +438,11 @@ var APP3D;
         }
 
         function addEbook(files){
-            var reader = new FileReader();
-            reader.onload = sendEbook;
-            reader.readAsDataURL(files[0]);
+            for(var i=0; i<files.length; i++){
+                var reader = new FileReader();
+                reader.onload = sendEbook;
+                reader.readAsDataURL(files[i]);
+            }
 
             function sendEbook(file){
                 $.post("php/upload.php", {
