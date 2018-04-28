@@ -440,6 +440,7 @@ var APP3D;
         function addEbook(files){
             var total = files.length;
             var i = 0;
+            $("body").addClass("progress");
             getEbook();
 
             function getEbook(){            
@@ -451,7 +452,7 @@ var APP3D;
             function sendEbook(file){
                 $.post("php/upload.php", {
                     data:file.target.result, 
-                    name:files[0].name
+                    name:files[i].name
                 }, check, "json");
 
                 function check(data){
@@ -466,6 +467,8 @@ var APP3D;
                     i++;
                     if(i<total){
                         getEbook();
+                    } else {
+                        $("body").removeClass("progress");
                     }
                 }
             }
