@@ -438,7 +438,11 @@ var APP3D;
         }
 
         function addEbook(files){
-            for(var i=0; i<files.length; i++){
+            var total = files.length;
+            var i = 0;
+            getEbook();
+
+            function getEbook(){            
                 var reader = new FileReader();
                 reader.onload = sendEbook;
                 reader.readAsDataURL(files[i]);
@@ -454,10 +458,14 @@ var APP3D;
                     if(data.success){
                         var option = $("<option></option>");
                         option.text(data.name);
-                        option.val(data.name)
+                        option.val(data.name);
                         $(".book").append(option);
                     } else {
                         console.error(data.error);
+                    }
+                    i++;
+                    if(i<total){
+                        getEbook();
                     }
                 }
             }
